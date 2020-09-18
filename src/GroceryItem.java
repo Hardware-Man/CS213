@@ -1,6 +1,6 @@
 /**
  * This class defines the abstract data type GroceryItem, which encapsulates the data fields (name, price, taxable)
- * and methods (equals, toString) of a grocery item. 123
+ * and methods (equals, toString) of a grocery item.
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
