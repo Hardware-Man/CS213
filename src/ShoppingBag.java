@@ -3,6 +3,7 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
+
 public class ShoppingBag {
     private GroceryItem[] bag;
     private int size;
@@ -11,6 +12,7 @@ public class ShoppingBag {
         this.bag = new GroceryItem[5];
         this.size = 0;
     }
+
     private int find(GroceryItem item) {
         for(int i = 0; i < this.size; i++) {
             if(this.bag[i].equals(item)) {
@@ -19,11 +21,13 @@ public class ShoppingBag {
         }
         return -1;
     }
+
     private void grow() {
         GroceryItem[] replaceBag = new GroceryItem[this.bag.length+5];
         System.arraycopy(this.bag, 0, replaceBag, 0, this.bag.length);
         this.bag = replaceBag;
     }
+
     public void add(GroceryItem item) {
         if(this.size == this.bag.length) {
             grow();
@@ -31,6 +35,7 @@ public class ShoppingBag {
         this.bag[size] = item;
         size++;
     }
+
     public boolean remove(GroceryItem item) {
         int itemPosition = find(item);
         if(itemPosition == -1) {
@@ -41,6 +46,7 @@ public class ShoppingBag {
         size--;
         return true;
     }
+
     public double salesPrice() {
         double salesTotal = 0;
         for(int i = 0; i < this.size; i++) {
@@ -48,6 +54,7 @@ public class ShoppingBag {
         }
         return salesTotal;
     }
+
     public double salesTax() {
         double taxTotal = 0;
         for(int i = 0; i < this.size; i++) {
@@ -57,14 +64,17 @@ public class ShoppingBag {
         }
         return taxTotal;
     }
+
     public void print() {
         for (int i = 0; i < this.size; i++) {
             System.out.println("·" + this.bag[i].toString());
         }
     }
+
     public boolean isEmpty() {
     	return getSize() == 0;
     }
+
     public int getSize() {
     	return size;
     }

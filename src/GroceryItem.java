@@ -17,6 +17,7 @@ public class GroceryItem {
         this.price = price;
         this.taxable = taxable;
     }
+
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -27,14 +28,17 @@ public class GroceryItem {
         }
         return false;
     }
+
     public String toString() {
         DecimalFormat df = new DecimalFormat("#0.00");
         String taxCheck = this.taxable ? "is taxable" : "tax free";
         return this.name + ": $" + df.format(this.price) + " : " + taxCheck;
     }
+
     public double getPrice() {
         return this.price;
     }
+
     public boolean isTaxable() {
         return this.taxable;
     }

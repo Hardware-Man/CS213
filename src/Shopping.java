@@ -3,9 +3,11 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
 public class Shopping {
 	private ShoppingBag addCommand(StringTokenizer st, ShoppingBag bag) {
 		String name = st.nextToken();
@@ -61,8 +63,7 @@ public class Shopping {
 		System.out.println("*Sales tax: $" + salesTaxFormat.format(bag.salesTax()));
 		System.out.println("*Total amount paid: $" + totalFormat.format(bag.salesPrice() + bag.salesTax()));
 	}
-	
-	
+
     public void run() {
         Scanner shopScan = new Scanner(System.in);
         ShoppingBag shopBag = new ShoppingBag();
@@ -113,12 +114,8 @@ public class Shopping {
 					System.out.println("Invalid command!");
 					break;
 			}
-
-
-
 		}
 		System.out.println("Thanks for shopping with us!");
     }
-
 }
 
