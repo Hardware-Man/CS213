@@ -58,8 +58,8 @@ public class Shopping {
 	
 	private void checkingOutCommand(ShoppingBag bag) {
 		System.out.println("**Checking out " + bag.getSize() +  " item(s): ");		
-		DecimalFormat salesTaxFormat = new DecimalFormat("#0.00");
-		DecimalFormat totalFormat = new DecimalFormat("##0.00");
+		DecimalFormat salesTaxFormat = new DecimalFormat("0.00");
+		DecimalFormat totalFormat = new DecimalFormat("0.00");
 		bag.print();
 		System.out.println("*Sales total: $" + totalFormat.format(bag.salesPrice()));
 		System.out.println("*Sales tax: $" + salesTaxFormat.format(bag.salesTax()));
