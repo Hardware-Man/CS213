@@ -9,15 +9,15 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Shopping {
-	private ShoppingBag addCommand(StringTokenizer st, ShoppingBag bag) {
-		String name = st.nextToken();
-		double price = Double.parseDouble(st.nextToken());
-		boolean taxable = Boolean.parseBoolean(st.nextToken());
-
-		if (st.hasMoreTokens()) {
+	private ShoppingBag addCommand(StringTokenizer tokens, ShoppingBag bag) {
+		if(tokens.countTokens() != 3) {
 			System.out.println("Invalid command!");
 			return bag;
 		}
+
+		String name = tokens.nextToken();
+		double price = Double.parseDouble(tokens.nextToken());
+		boolean taxable = Boolean.parseBoolean(tokens.nextToken());
 		
 		GroceryItem item = new GroceryItem(name,price,taxable);
 		bag.add(item);
@@ -25,20 +25,21 @@ public class Shopping {
 		return bag;
 	}
 	
-	private ShoppingBag removeCommand(StringTokenizer st, ShoppingBag bag) {
-		String name = st.nextToken();
-		double price = Double.parseDouble(st.nextToken());
-		boolean taxable = Boolean.parseBoolean(st.nextToken());
-		GroceryItem item = new GroceryItem(name,price,taxable);
-
-		if (st.hasMoreTokens()) {
+	private ShoppingBag removeCommand(StringTokenizer tokens, ShoppingBag bag) {
+		if(tokens.countTokens() != 3) {
 			System.out.println("Invalid command!");
 			return bag;
 		}
 
+		String name = tokens.nextToken();
+		double price = Double.parseDouble(tokens.nextToken());
+		boolean taxable = Boolean.parseBoolean(tokens.nextToken());
+
+		GroceryItem item = new GroceryItem(name,price,taxable);
 		if(bag.remove(item)) {
 			System.out.println(name + " " + price + " removed.");
-		}else {
+		}
+		else {
 			System.out.println("Unable to remove, this item is not in the bag.");
 		}
 		return bag;
@@ -47,10 +48,11 @@ public class Shopping {
 	private void displayCommand(ShoppingBag bag) {
 		if(bag.isEmpty()) {
 			System.out.println("The bag is empty!");
-		} else {
-		System.out.println("**You have " + bag.getSize() + " item(s) in the bag: ");
-		bag.print();
-		System.out.println("**End of list");
+		}
+		else {
+			System.out.println("**You have " + bag.getSize() + " item(s) in the bag: ");
+			bag.print();
+			System.out.println("**End of list");
 		}
 	}
 	
@@ -70,7 +72,7 @@ public class Shopping {
         StringTokenizer tokens;
         
         System.out.println("Let's start shopping!");
-		label:
+		quit:
 		while(true) {
 			tokens = new StringTokenizer(shopScan.nextLine());
 			String commandLetter = tokens.nextToken();
@@ -84,7 +86,7 @@ public class Shopping {
 					if (!shopBag.isEmpty()) {
 						checkingOutCommand(shopBag);
 					}
-					break label;
+					break quit;
 				case "A":
 					shopBag = addCommand(tokens, shopBag);
 					break;
@@ -105,7 +107,8 @@ public class Shopping {
 					}
 					if (shopBag.isEmpty()) {
 						System.out.println("Unable to check out, the bag is empty!");
-					} else {
+					}
+					else {
 						checkingOutCommand(shopBag);
 						shopBag = new ShoppingBag();
 					}
