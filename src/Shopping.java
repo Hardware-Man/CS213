@@ -7,19 +7,15 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 public class Shopping {
-	
-	final double TAX_RATE = 0.06625; 
-	double salesTotal = 0;
-	double taxTotal = 0;
-
 	private ShoppingBag addCommand(StringTokenizer st, ShoppingBag bag) {
 		String name = st.nextToken();
-		double price = Double.valueOf(st.nextToken());
-		boolean taxable = Boolean.valueOf(st.nextToken());
-		if(taxable) {
-			taxTotal += price * TAX_RATE;
+		double price = Double.parseDouble(st.nextToken());
+		boolean taxable = Boolean.parseBoolean(st.nextToken());
+
+		if (st.hasMoreTokens()) {
+			System.out.println("Invalid command!");
+			return bag;
 		}
-		salesTotal += price;
 		
 		GroceryItem item = new GroceryItem(name,price,taxable);
 		bag.add(item);
@@ -29,15 +25,16 @@ public class Shopping {
 	
 	private ShoppingBag removeCommand(StringTokenizer st, ShoppingBag bag) {
 		String name = st.nextToken();
-		double price = Double.valueOf(st.nextToken());
-		boolean taxable = Boolean.valueOf(st.nextToken());
+		double price = Double.parseDouble(st.nextToken());
+		boolean taxable = Boolean.parseBoolean(st.nextToken());
 		GroceryItem item = new GroceryItem(name,price,taxable);
 
+		if (st.hasMoreTokens()) {
+			System.out.println("Invalid command!");
+			return bag;
+		}
+
 		if(bag.remove(item)) {
-			if(taxable) {
-				taxTotal -= price * TAX_RATE;
-			}
-			salesTotal -= price;
 			System.out.println(name + " " + price + " removed.");
 		}else {
 			System.out.println("Unable to remove, this item is not in the bag.");
@@ -57,14 +54,12 @@ public class Shopping {
 	
 	private void checkingOutCommand(ShoppingBag bag) {
 		System.out.println("**Checking out " + bag.getSize() +  " item(s): ");		
-		DecimalFormat salesTaxFormat = new DecimalFormat("##.##");
-		DecimalFormat totalFormat = new DecimalFormat("###.##");
+		DecimalFormat salesTaxFormat = new DecimalFormat("#0.00");
+		DecimalFormat totalFormat = new DecimalFormat("##0.00");
 		bag.print();
-		System.out.println("*Sales total: $" + totalFormat.format(salesTotal));
-		System.out.println("*Sales tax: $" + salesTaxFormat.format(taxTotal));
-		System.out.println("*Total amount paid: $" + totalFormat.format(salesTotal + taxTotal));
-		
-
+		System.out.println("*Sales total: $" + totalFormat.format(bag.salesPrice()));
+		System.out.println("*Sales tax: $" + salesTaxFormat.format(bag.salesTax()));
+		System.out.println("*Total amount paid: $" + totalFormat.format(bag.salesPrice() + bag.salesTax()));
 	}
 	
 	
@@ -74,38 +69,55 @@ public class Shopping {
         StringTokenizer tokens;
         
         System.out.println("Let's start shopping!");
-        while(true) {
-        	tokens = new StringTokenizer(shopScan.nextLine());
-        	String commandLetter = tokens.nextToken();
-        	
-        	if(commandLetter.equals("Q")) {
-        		if(!shopBag.isEmpty()) {
-        			checkingOutCommand(shopBag);
-        		}
-        		break;
-        	}
-        	else if(commandLetter.equals("A")) {
-        		shopBag = addCommand(tokens,shopBag);
-        	}
-        	else if(commandLetter.equals("R")) {
-        		shopBag = removeCommand(tokens,shopBag);
-        	}
-        	else if(commandLetter.equals("P")) {
-        		displayCommand(shopBag);
-        	}
-        	else if(commandLetter.equals("C")) {
-        		if(shopBag.isEmpty()) {
-        			System.out.println("Unable to check out, the bag is empty!");
-        		}else {
-        			checkingOutCommand(shopBag);
-        		}
-        	}
-        	else System.out.println("Invalid command!");;
-             
-        	
+		label:
+		while(true) {
+			tokens = new StringTokenizer(shopScan.nextLine());
+			String commandLetter = tokens.nextToken();
 
-        }
-        System.out.println("Thanks for shopping with us!");
+			switch (commandLetter) {
+				case "Q":
+					if (tokens.hasMoreTokens()) {
+						System.out.println("Invalid command!");
+						break;
+					}
+					if (!shopBag.isEmpty()) {
+						checkingOutCommand(shopBag);
+					}
+					break label;
+				case "A":
+					shopBag = addCommand(tokens, shopBag);
+					break;
+				case "R":
+					shopBag = removeCommand(tokens, shopBag);
+					break;
+				case "P":
+					if (tokens.hasMoreTokens()) {
+						System.out.println("Invalid command!");
+						break;
+					}
+					displayCommand(shopBag);
+					break;
+				case "C":
+					if (tokens.hasMoreTokens()) {
+						System.out.println("Invalid command!");
+						break;
+					}
+					if (shopBag.isEmpty()) {
+						System.out.println("Unable to check out, the bag is empty!");
+					} else {
+						checkingOutCommand(shopBag);
+						shopBag = new ShoppingBag();
+					}
+					break;
+				default:
+					System.out.println("Invalid command!");
+					break;
+			}
+
+
+
+		}
+		System.out.println("Thanks for shopping with us!");
     }
 
 }
