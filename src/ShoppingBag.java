@@ -32,4 +32,10 @@ public class ShoppingBag {
     public void print() {
 
     }
+    public boolean isEmpty() {
+    	return getSize() == 0;
+    }
+    public int getSize() {
+    	return size;
+    }
 }
