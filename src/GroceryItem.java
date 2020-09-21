@@ -4,7 +4,9 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
+
 import java.text.DecimalFormat;
+
 public class GroceryItem {
     private String name;
     private double price;

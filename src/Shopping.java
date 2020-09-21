@@ -4,18 +4,17 @@
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
 import java.util.Scanner;
+import java.util.StringTokenizer;
 public class Shopping {
 
     public void run() {
         Scanner shopScan = new Scanner(System.in);
         ShoppingBag shopBag = new ShoppingBag();
-        String shopCommand = shopScan.nextLine();
+        String delims = "\\s";
+
+        String shopCommand = " ";
         System.out.println("Let's start shopping!");
-        while(shopCommand.charAt(0) != 'Q' && shopCommand.length() > 1) {
-            if(shopCommand.charAt(0) == 'A') {
-//                GroceryItem tempItem
-//                shopBag.add();
-            }
+        while(true) {
             shopCommand = shopScan.nextLine();
         }
         System.out.println("Thanks for shopping with us!");
