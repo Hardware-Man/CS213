@@ -72,7 +72,7 @@ public class ShoppingBag {
     }
 
     public boolean isEmpty() {
-    	return this.getSize() == 0;
+    	return this.size == 0;
     }
 
     public int getSize() {
