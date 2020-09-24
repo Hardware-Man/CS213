@@ -1,12 +1,12 @@
-import java.text.DecimalFormat;
-import java.util.Scanner;
-import java.util.StringTokenizer;
-
 /**
  * This class is the user interface class that handles the input commands, output data and messages.
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
+import java.text.DecimalFormat;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
 public class Shopping {
 	private ShoppingBag addCommand(StringTokenizer tokens, ShoppingBag bag) {
 		if(tokens.countTokens() != 3) {
