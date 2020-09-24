@@ -3,7 +3,6 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-
 public class ShoppingBag {
     private GroceryItem[] bag;
     private int size;

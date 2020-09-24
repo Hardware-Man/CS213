@@ -1,12 +1,11 @@
+import java.text.DecimalFormat;
+
 /**
  * This class defines the abstract data type GroceryItem, which encapsulates the data fields (name, price, taxable)
  * and methods (equals, toString) of a grocery item.
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
-
-import java.text.DecimalFormat;
-
 public class GroceryItem {
     private String name;
     private double price;
