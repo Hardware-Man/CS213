@@ -80,6 +80,26 @@ public class ShoppingBag {
     }
 
     public static void main(String[] args) {
-
+        ShoppingBag testBag = new ShoppingBag();
+        testBag.add(new GroceryItem("milk",2.50,true));
+        System.out.println("Testing for successful add. (Checking item, bag size, and capacity)");
+        testBag.print();
+        System.out.println("Current bag size (# of items): " + testBag.getSize());
+        System.out.println("Current bag capacity: " + testBag.bag.length);
+        testBag.add(new GroceryItem("milk",2.50,true));
+        testBag.add(new GroceryItem("milk",2.50,true));
+        testBag.add(new GroceryItem("milk",2.50,true));
+        testBag.add(new GroceryItem("milk",2.50,true));
+        System.out.println("Testing for successful adds up to maximum capacity. (Checking items, bag size, " +
+                "and capacity)");
+        testBag.print();
+        System.out.println("Current bag size (# of items): " + testBag.getSize());
+        System.out.println("Current bag capacity: " + testBag.bag.length);
+        testBag.add(new GroceryItem("milk",2.50,true));
+        System.out.println("Testing for successful adds beyond current maximum capacity and capacity increase. " +
+                "(Checking items, bag size, and capacity)");
+        testBag.print();
+        System.out.println("Current bag size (# of items): " + testBag.getSize());
+        System.out.println("Current bag capacity: " + testBag.bag.length);
     }
 }
