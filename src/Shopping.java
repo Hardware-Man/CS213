@@ -3,11 +3,20 @@
  *
  * @author Kaivalya Mishra, Ridwanur Sarder
  */
+
 import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Shopping {
+
+    /**
+	 * Adds an object of type GroceryItem initialized by input tokens to a ShoppingBag object.
+	 *
+	 * @param tokens in the add request(item name, price, and taxable)
+	 * @param bag prior to addition of item
+	 * @return updated shopping bag with item added
+	 */
 	private ShoppingBag addCommand(StringTokenizer tokens, ShoppingBag bag) {
 		if(tokens.countTokens() != 3) {
 			System.out.println("Invalid command!");
@@ -17,13 +26,21 @@ public class Shopping {
 		String name = tokens.nextToken();
 		double price = Double.parseDouble(tokens.nextToken());
 		boolean taxable = Boolean.parseBoolean(tokens.nextToken());
-		
+
 		GroceryItem item = new GroceryItem(name,price,taxable);
 		bag.add(item);
 		System.out.println(name + " added to the bag.");
 		return bag;
 	}
-	
+
+	/**
+	 * Removes an object of type GroceryItem described by input tokens from a ShoppingBag object.
+	 * If item is not found in the ShoppingBag object, prints out a message saying so.
+	 *
+	 * @param tokens in the remove request(item name, price, and taxable)
+	 * @param bag prior to removal of item
+	 * @return updated shopping bag with item removed
+	 */
 	private ShoppingBag removeCommand(StringTokenizer tokens, ShoppingBag bag) {
 		if(tokens.countTokens() != 3) {
 			System.out.println("Invalid command!");
@@ -43,7 +60,12 @@ public class Shopping {
 		}
 		return bag;
 	}
-	
+
+	/**
+	 * Displays the contents of a shopping bag.
+	 *
+	 * @param bag to display contents of
+	 */
 	private void displayCommand(ShoppingBag bag) {
 		if(bag.isEmpty()) {
 			System.out.println("The bag is empty!");
@@ -54,9 +76,16 @@ public class Shopping {
 			System.out.println("**End of list");
 		}
 	}
-	
+
+	/**
+	 * Checks out all the objects in the shopping bag, emptying it afterwards.
+	 * If bag is empty, will display a message saying so. 
+	 * Prints out the items being checked out, sales total, sales tax, and total amount paid.
+	 *
+	 * @param bag to be checked out
+	 */
 	private void checkingOutCommand(ShoppingBag bag) {
-		System.out.println("**Checking out " + bag.getSize() +  " item(s): ");		
+		System.out.println("**Checking out " + bag.getSize() +  " item(s): ");
 		DecimalFormat salesTaxFormat = new DecimalFormat("0.00");
 		DecimalFormat totalFormat = new DecimalFormat("0.00");
 		bag.print();
@@ -65,12 +94,19 @@ public class Shopping {
 		System.out.println("*Total amount paid: $" + totalFormat.format(bag.salesPrice() + bag.salesTax()));
 	}
 
-    public void run() {
-        Scanner shopScan = new Scanner(System.in);
-        ShoppingBag shopBag = new ShoppingBag();
-        StringTokenizer tokens;
-        
-        System.out.println("Let's start shopping!");
+
+	/**
+	 * User interface method to emulate a shopping bag and shopping functions.
+	 * Commands include add, remove, display, check out, and quit.
+	 */
+	public void run() {
+		Scanner shopScan = new Scanner(System.in);
+		ShoppingBag shopBag = new ShoppingBag();
+		StringTokenizer tokens;
+
+		System.out.println("Let's start shopping!");
+		
+		//Read input and run methods accordingly
 		quit:
 		while(true) {
 			tokens = new StringTokenizer(shopScan.nextLine());
@@ -120,4 +156,3 @@ public class Shopping {
 		System.out.println("Thanks for shopping with us!");
     }
 }
-
