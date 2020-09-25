@@ -93,9 +93,9 @@ public class ShoppingBag {
     }
 
     /**
-     * Takes the sum of all the GroceryItem objects' price values multiplied by the constant 0.06625 within the bag.
+     * Takes the sum of all "taxable" GroceryItem objects' price values multiplied by the constant 0.06625 within the bag.
      *
-     * @return Returns sum price of bag GroceryItem objects multiplied by 0.06625 as a double
+     * @return Returns sum price of bag's "taxable" GroceryItem objects multiplied by 0.06625 as a double
      */
     public double salesTax() {
         double taxTotal = 0;
