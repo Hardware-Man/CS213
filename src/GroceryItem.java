@@ -8,8 +8,19 @@
 import java.text.DecimalFormat;
 
 public class GroceryItem {
+    /**
+     * Name of GroceryItem object.
+     */
     private String name;
+
+    /**
+     * Price of GroceryItem object as a double.
+     */
     private double price;
+
+    /**
+     * Boolean to indicate whether or not GroceryItem object is taxable.
+     */
     private boolean taxable;
 
     /**
